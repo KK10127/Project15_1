@@ -20,28 +20,41 @@
  *      have a member function that can be called after the sorting is done to retrive the
  *      number of comparisons performed.
  *
+ * ALGORITHM:
+ * 1. Create the array of a size holding integers of various values.
+ * 2. Print the array to the console.
+ * 3. Create 'BubbleSort' object.
+ * 4. Call sort() on the 'bs' object to sort the values.
+ * 5. Print the array once again.
+ * 6. Call 'bs.getNumComparisons()' to print the number of comparisons.
  *
  */
 
 #include <iostream>
 using namespace std;
 
+// Base class
+
 class AbstractSort {
 private:
+    // to hold the number of comparisons made
     int numComparisons;
 
 public:
+    // default constructor
     AbstractSort() {
         numComparisons = 0;
     }
-
 
     // pure virtual function
     virtual void sort(int arr[], int size) = 0;
 
     // simple compare function that returns 0 if equal, -1 if x preceeds y, and +1 if y preceeds x
     int compare(int x, int y) {
+        // increments comparisons
         numComparisons++;
+
+        // modeled after strcmp
         if (x == y)
             return 0;
         else if (x < y)
@@ -50,6 +63,7 @@ public:
             return 1;
     }
 
+    // simple swap function to swap two elements
     void swap(int *x, int *y)
     {
         int temp = *x;
@@ -57,11 +71,13 @@ public:
         *y = temp;
     }
 
+
     // accessor function for the number of comparisons in this sort
     int getNumComparisons() { return numComparisons; }
 
 };
 
+// derived class
 class BubbleSort : public AbstractSort {
 public:
 
